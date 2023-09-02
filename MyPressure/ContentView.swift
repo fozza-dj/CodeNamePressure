@@ -14,6 +14,18 @@ struct ContentView: View {
                 .imageScale(.large)
                 .foregroundStyle(.tint)
             Text("Hello, world!")
+            
+            Text("V")
+                .bold()
+                .font(.system(size:11))
+                .frame(width: 15, height: 15)
+                .foregroundColor(.yellow)
+                .background(Color.red)
+                .clipShape(Circle())
+                .overlay(
+                    RoundedRectangle(cornerRadius: 7.5)
+                        .stroke(Color.white, lineWidth: 1)
+                )
         }
         .padding()
     }
