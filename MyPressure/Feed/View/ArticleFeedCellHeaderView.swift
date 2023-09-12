@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct FeedCellHeaderView : View {
+struct ArticleFeedCellHeaderView : View {
     var body: some View {
         HStack(spacing: 5) {
             Image(uiImage: UIImage(named: "7f9147a5ly1fzxlgxgzpij20e90fltsj.jpg")!)
@@ -53,5 +53,5 @@ struct FeedCellHeaderView : View {
 }
 
 #Preview {
-    FeedCellHeaderView()
+    ArticleFeedCellHeaderView()
 }
