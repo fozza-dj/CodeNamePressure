@@ -40,9 +40,17 @@ def generate_random_text(length=20):
     random_string = ''.join(random.choice(letters) for _ in range(random_number))
     return random_string
 
-# 获取文件夹下的 JPG 文件
+# 获取文件夹下的 某个jpg图片
+def get_random_jpg():
+    folder_path = "../MyPressure/Resources/"  # 替换为实际的文件夹路径
+
+    jpg_files = [file for file in os.listdir(folder_path) if file.endswith(".jpg")]
+    if jpg_files:
+        return random.choice(jpg_files)
+
+# 获取文件夹下的 JPG 文件 输出0~N个jpg文件名
 def get_random_jpg_filelist(n):
-    random_number = random.randint(1, n)
+    random_number = random.randint(0, n)
     folder_path = "../MyPressure/Resources/"  # 替换为实际的文件夹路径
     jpg_list = []
     for i in range(random_number):
@@ -56,7 +64,7 @@ def get_random_jpg_filelist(n):
 def generate_author():
     userID = generate_random_id()
     nickname = generate_random_text()
-    avatarUrl = get_random_jpg_filelist(1)
+    avatarUrl = get_random_jpg()
     followStatus = random.choice([0, 1])
     isVip = random.choice([True, False])
     author = UserModel(userID, nickname, avatarUrl, followStatus, isVip)
@@ -66,10 +74,19 @@ def generate_author():
 def generate_acticle():
     articleID = generate_random_id()
     author = generate_author()
-    text = generate_random_text()
+    text = generate_chinese_article_text()
     imageUrls = get_random_jpg_filelist(4)
     article = ArticleModel(articleID, author, text, imageUrls)
     return article
+
+# 生成随机的中文推文
+def generate_chinese_article_text():
+    random_number = random.randint(1, 100)
+    chinese_text = ""
+    while len(chinese_text) < random_number:
+        chinese_char = chr(random.randint(0x4E00, 0x9FFF))  # 随机选择一个中文字符的Unicode码
+        chinese_text += chinese_char
+    return chinese_text[:random_number]
 
 def generate_article_list_dict(n):
     article_list = []

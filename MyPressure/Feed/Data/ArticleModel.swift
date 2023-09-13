@@ -16,9 +16,9 @@ struct ArticleModel : Decodable {
     let articleID : String
     let author : UserModel
     let text : String
-    let imageUrls : String
+    let imageUrls : [String]
     // date? todo:dj1
-    let date : Date
+    let date : Date?
     
     // interaction
     var commentCount : Int
@@ -28,14 +28,13 @@ struct ArticleModel : Decodable {
     // business infomation
 }
 
-func loadPostListData(_ filename: String) -> ArticleList {
+func loadArticleListData(_ filename: String) -> ArticleList {
     guard let url = Bundle.main.url(forResource: filename, withExtension: nil) else {
         fatalError("Can't find \(filename) in main bundle.")
     }
     guard let data = try? Data(contentsOf: url) else {
         fatalError("Can not load \(url)")
     }
-    
     guard let articleList = try? JSONDecoder().decode(ArticleList.self, from: data) else {
         fatalError("Can not parse acticle list data.")
     }

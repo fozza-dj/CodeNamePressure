@@ -9,9 +9,13 @@ import Foundation
 import SwiftUI
 
 struct ArticleFeedCellHeaderView : View {
+//    var vm : ArticleFeedCellVM?
+    let article = loadArticleListData("test1.json").list[0]
+    
     var body: some View {
         HStack(spacing: 5) {
-            Image(uiImage: UIImage(named: "7f9147a5ly1fzxlgxgzpij20e90fltsj.jpg")!)
+            // todo: default image
+            Image(uiImage: UIImage(named:  article.author.avatarUrl)!)
                 .resizable()
                 .scaledToFill()
                 .frame(width: 50, height: 50)
@@ -23,7 +27,7 @@ struct ArticleFeedCellHeaderView : View {
                 .padding(.leading, 10)
             
             VStack(alignment: .leading, spacing: 5) {
-                Text("Username")
+                Text(article.author.nickname)
                     .font(Font.system(size: 16))
                     .foregroundStyle(Color(red: 242 / 255, green: 99 / 255, blue: 4 / 255))
                     .lineLimit(1)
@@ -50,8 +54,4 @@ struct ArticleFeedCellHeaderView : View {
             .padding(.trailing, 10)
         }
     }
-}
-
-#Preview {
-    ArticleFeedCellHeaderView()
 }
